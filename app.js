@@ -37,7 +37,7 @@ async function generateCardBackground(cardNumber, expiryDate, cardHolder) {
     // Dibujar la fecha de vencimiento
     ctx.font = '60px Arial'; // Fuente y tamaño del texto
     ctx.fillStyle = '#ffffff'; // Color blanco para el texto
-    ctx.fillText(`Vencimiento: ${expiryDate}`, canvas.width / 1.75, 1000); // Posición y texto
+    ctx.fillText(`Vto: ${expiryDate}`, canvas.width / 1.75, 1000); // Posición y texto
 
     // Dibujar el nombre del titular
     ctx.font = '60px Arial'; // Fuente y tamaño del texto
