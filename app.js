@@ -1,21 +1,23 @@
 const express = require('express');
-const { createCanvas } = require('canvas');
+const { createCanvas, loadImage } = require('canvas');
 const cors = require('cors'); 
 
 const app = express();
 
-app.use(cors());
+app.use(cors())
 
 const PORT = process.env.PORT || 3000;
 
-// Función para generar la imagen de la tarjeta
-function generateCardBackground(cardNumber, expiryDate, cardHolder) {
+// Función para generar la imagen de la tarjeta con datos dinámicos
+async function generateCardBackground(cardNumber, expiryDate, cardHolder) {
     const canvas = createCanvas(600, 400); // Ancho y alto del lienzo
     const ctx = canvas.getContext('2d');
 
-    // Dibujar fondo rojo
-    ctx.fillStyle = '#ff0000'; // Color rojo
-    ctx.fillRect(0, 0, canvas.width, canvas.height); // Rellenar todo el lienzo
+    // Cargar la imagen de fondo
+    const backgroundImage = await loadImage('/Users/veronica/Documents/Tigre/Tarjeta soy tigre.png');
+
+    // Dibujar la imagen de fondo
+    ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
 
     // Dibujar el texto "SOY TIGRE"
     ctx.fillStyle = '#ffffff'; // Color blanco para el texto
@@ -49,7 +51,7 @@ app.get('/', async (req, res) => {
         }
 
         const cardBuffer = await generateCardBackground(cardNumber, expiryDate, cardHolder);
-
+        
         // Establecer headers
         res.set('Content-Type', 'image/png'); // Tipo de contenido es imagen PNG
 
@@ -62,6 +64,11 @@ app.get('/', async (req, res) => {
 });
 
 // Iniciar el servidor
+app.listen(PORT, () => {
+    console.log(`Servidor iniciado en http://localhost:${PORT}`);
+});
+
+
 app.listen(PORT, () => {
     console.log(`Servidor iniciado en http://localhost:${PORT}`);
 });
