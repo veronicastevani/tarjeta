@@ -1,43 +1,48 @@
 const express = require('express');
 const { createCanvas, loadImage } = require('canvas');
-const cors = require('cors'); 
+const cors = require('cors');
 
 const app = express();
 
-app.use(cors())
+app.use(cors());
 
 const PORT = process.env.PORT || 3000;
 
 // Función para generar la imagen de la tarjeta con datos dinámicos
 async function generateCardBackground(cardNumber, expiryDate, cardHolder) {
-    const canvas = createCanvas(600, 400); // Ancho y alto del lienzo
+    const canvas = createCanvas(2400, 1400); // Ancho y alto del lienzo
     const ctx = canvas.getContext('2d');
 
     // Cargar la imagen de fondo
-    const backgroundImage = await loadImage('/Users/veronica/Documents/Tigre/Tarjeta soy tigre.png');
+    const backgroundImage = await loadImage(__dirname + '/Tarjeta soy tigre.png');
 
     // Dibujar la imagen de fondo
     ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
 
     // Dibujar el texto "SOY TIGRE"
-    ctx.fillStyle = '#ffffff'; // Color blanco para el texto
-    ctx.font = '30px Arial'; // Fuente y tamaño del texto
-    ctx.textAlign = 'center'; // Alineación centrada
-    ctx.fillText('SOY TIGRE', canvas.width / 2, 50); // Posición y texto
+    //ctx.fillStyle = '#ffffff'; // Color blanco para el texto
+    //ctx.font = '30px Arial'; // Fuente y tamaño del texto
+    //ctx.textAlign = 'center'; // Alineación centrada
+    //ctx.fillText('SOY TIGRE', canvas.width / 1.5, 50); // Posición y texto
 
     // Dibujar el subtítulo "TARJETA DE BENEFICIOS"
-    ctx.font = '20px Arial'; // Tamaño del subtítulo
-    ctx.fillText('TARJETA DE BENEFICIOS', canvas.width / 2, 90); // Posición y texto
+    //ctx.font = '20px Arial'; // Tamaño del subtítulo
+    //ctx.fillText('TARJETA DE BENEFICIOS', canvas.width / 5, 10); // Posición y texto
 
     // Dibujar el número de la tarjeta
-    ctx.font = '20px Arial'; // Tamaño del texto
-    ctx.fillText(`Número: ${cardNumber}`, canvas.width / 2, 150); // Posición y texto
+    ctx.font = '60px Arial'; // Fuente y tamaño del texto
+    ctx.fillStyle = '#ffffff'; // Color blanco para el texto
+    ctx.fillText(`Número: ${cardNumber}`, canvas.width / 5, 1000); // Posición y texto
 
     // Dibujar la fecha de vencimiento
-    ctx.fillText(`Vencimiento: ${expiryDate}`, canvas.width / 2, 180); // Posición y texto
+    ctx.font = '60px Arial'; // Fuente y tamaño del texto
+    ctx.fillStyle = '#ffffff'; // Color blanco para el texto
+    ctx.fillText(`Vencimiento: ${expiryDate}`, canvas.width / 1.75, 1000); // Posición y texto
 
     // Dibujar el nombre del titular
-    ctx.fillText(`Titular: ${cardHolder}`, canvas.width / 2, 210); // Posición y texto
+    ctx.font = '60px Arial'; // Fuente y tamaño del texto
+    ctx.fillStyle = '#ffffff'; // Color blanco para el texto
+    ctx.fillText(`Titular: ${cardHolder}`, canvas.width / 5, 1100); // Posición y texto
 
     return canvas.toBuffer(); // Devolver el buffer de la imagen generada
 }
@@ -51,7 +56,7 @@ app.get('/', async (req, res) => {
         }
 
         const cardBuffer = await generateCardBackground(cardNumber, expiryDate, cardHolder);
-        
+
         // Establecer headers
         res.set('Content-Type', 'image/png'); // Tipo de contenido es imagen PNG
 
@@ -64,11 +69,6 @@ app.get('/', async (req, res) => {
 });
 
 // Iniciar el servidor
-app.listen(PORT, () => {
-    console.log(`Servidor iniciado en http://localhost:${PORT}`);
-});
-
-
 app.listen(PORT, () => {
     console.log(`Servidor iniciado en http://localhost:${PORT}`);
 });
