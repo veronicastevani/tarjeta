@@ -30,7 +30,7 @@ async function generateCardBackground(cardNumber, expiryDate, cardHolder) {
     //ctx.fillText('TARJETA DE BENEFICIOS', canvas.width / 5, 10); // Posición y texto
 
     // Dibujar el número de la tarjeta
-    ctx.font = '25px Arial medium'; // Fuente y tamaño del texto
+    ctx.font = '25px Arial'; // Fuente y tamaño del texto
     ctx.fillStyle = '#ffffff'; // Color blanco para el texto
     ctx.fillText(`Número: ${cardNumber}`, canvas.width / 5, 350); // Posición y texto
 
