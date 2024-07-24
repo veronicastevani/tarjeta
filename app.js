@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 
 // Función para generar la imagen de la tarjeta con datos dinámicos
 async function generateCardBackground(cardNumber, expiryDate, cardHolder) {
-    const canvas = createCanvas(2400, 1400); // Ancho y alto del lienzo
+    const canvas = createCanvas(800, 500); // Ancho y alto del lienzo
     const ctx = canvas.getContext('2d');
 
     // Cargar la imagen de fondo
@@ -30,19 +30,19 @@ async function generateCardBackground(cardNumber, expiryDate, cardHolder) {
     //ctx.fillText('TARJETA DE BENEFICIOS', canvas.width / 5, 10); // Posición y texto
 
     // Dibujar el número de la tarjeta
-    ctx.font = '60px Arial'; // Fuente y tamaño del texto
+    ctx.font = '25px Arial medium'; // Fuente y tamaño del texto
     ctx.fillStyle = '#ffffff'; // Color blanco para el texto
-    ctx.fillText(`Número: ${cardNumber}`, canvas.width / 5, 1000); // Posición y texto
+    ctx.fillText(`Número: ${cardNumber}`, canvas.width / 5, 350); // Posición y texto
 
     // Dibujar la fecha de vencimiento
-    ctx.font = '60px Arial'; // Fuente y tamaño del texto
+    ctx.font = '20px Arial'; // Fuente y tamaño del texto
     ctx.fillStyle = '#ffffff'; // Color blanco para el texto
-    ctx.fillText(`Vto: ${expiryDate}`, canvas.width / 1.75, 1000); // Posición y texto
+    ctx.fillText(`VTO: ${expiryDate}`, canvas.width / 1.7, 290); // Posición y texto
 
     // Dibujar el nombre del titular
-    ctx.font = '60px Arial'; // Fuente y tamaño del texto
+    ctx.font = '25px Arial'; // Fuente y tamaño del texto
     ctx.fillStyle = '#ffffff'; // Color blanco para el texto
-    ctx.fillText(`Titular: ${cardHolder}`, canvas.width / 5, 1100); // Posición y texto
+    ctx.fillText(`Titular: ${cardHolder}`, canvas.width / 5, 400); // Posición y texto
 
     return canvas.toBuffer(); // Devolver el buffer de la imagen generada
 }
